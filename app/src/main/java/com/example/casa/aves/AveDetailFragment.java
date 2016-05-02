@@ -7,9 +7,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.casa.aves.dummy.DummyContent;
+import com.example.casa.aves.contenido.Lista_contenido;
 
 /**
  * A fragment representing a single Ave detail screen.
@@ -25,9 +26,9 @@ public class AveDetailFragment extends Fragment {
     public static final String ARG_ITEM_ID = "item_id";
 
     /**
-     * The dummy content this fragment is presenting.
+     * The dummy textoEncima this fragment is presenting.
      */
-    private DummyContent.DummyItem mItem;
+    private Lista_contenido.Lista_entrada mItem;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -41,15 +42,15 @@ public class AveDetailFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments().containsKey(ARG_ITEM_ID)) {
-            // Load the dummy content specified by the fragment
+            // Load the dummy textoEncima specified by the fragment
             // arguments. In a real-world scenario, use a Loader
-            // to load content from a content provider.
-            mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
+            // to load textoEncima from a textoEncima provider.
+            mItem = Lista_contenido.ENTRADAS_LISTA_HASHMAP.get(getArguments().getString(ARG_ITEM_ID));
 
             Activity activity = this.getActivity();
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
             if (appBarLayout != null) {
-                appBarLayout.setTitle(mItem.content);
+                appBarLayout.setTitle(mItem.textoEncima);
             }
         }
     }
@@ -59,9 +60,11 @@ public class AveDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.ave_detail, container, false);
 
-        // Show the dummy content as text in a TextView.
+        //Mostramos el contenido al usuario
         if (mItem != null) {
-            ((TextView) rootView.findViewById(R.id.ave_detail)).setText(mItem.details);
+            ((TextView) rootView.findViewById(R.id.textView_superior)).setText(mItem.textoEncima);
+            ((TextView) rootView.findViewById(R.id.textView_inferior)).setText(mItem.textoDebajo);
+            ((ImageView) rootView.findViewById(R.id.imageView_imagen)).setImageResource(mItem.idImagen);
         }
 
         return rootView;
