@@ -3,4 +3,5 @@
     <string name="title_ave_detail">Ave Detail</string>
     <string name="descripcion_contenido">Descripción del contenido de la imagen</string>
     <string name="textoPequeno">Small Text</string>
+    <string name="textoGrande">Large Text</string>
 </resources>
