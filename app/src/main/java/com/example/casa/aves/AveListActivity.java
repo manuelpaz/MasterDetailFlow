@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.design.widget.FloatingActionButton;
@@ -13,10 +12,11 @@ import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
-import com.example.casa.aves.dummy.DummyContent;
+import com.example.casa.aves.contenido.Lista_contenido;
 
 import java.util.List;
 
@@ -25,8 +25,8 @@ import java.util.List;
  * has different presentations for handset and tablet-size devices. On
  * handsets, the activity presents a list of items, which when touched,
  * lead to a {@link AveDetailActivity} representing
- * item details. On tablets, the activity presents the list of items and
- * item details side-by-side using two vertical panes.
+ * item textoDebajo. On tablets, the activity presents the list of items and
+ * item textoDebajo side-by-side using two vertical panes.
  */
 public class AveListActivity extends AppCompatActivity {
 
@@ -68,15 +68,15 @@ public class AveListActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(DummyContent.ITEMS));
+        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(Lista_contenido.ENTRADAS_LISTA));
     }
 
     public class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
-        private final List<DummyContent.DummyItem> mValues;
+        private final List<Lista_contenido.Lista_entrada> mValues;
 
-        public SimpleItemRecyclerViewAdapter(List<DummyContent.DummyItem> items) {
+        public SimpleItemRecyclerViewAdapter(List<Lista_contenido.Lista_entrada> items) {
             mValues = items;
         }
 
@@ -90,8 +90,8 @@ public class AveListActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
             holder.mItem = mValues.get(position);
-            holder.mIdView.setText(mValues.get(position).id);
-            holder.mContentView.setText(mValues.get(position).content);
+            holder.texto_superior_entrada.setText(holder.mItem.textoEncima);
+            holder.imagenEntrada.setImageResource(holder.mItem.idImagen);
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -122,20 +122,20 @@ public class AveListActivity extends AppCompatActivity {
 
         public class ViewHolder extends RecyclerView.ViewHolder {
             public final View mView;
-            public final TextView mIdView;
-            public final TextView mContentView;
-            public DummyContent.DummyItem mItem;
+            public final ImageView imagenEntrada;
+            public final TextView texto_superior_entrada;
+            public Lista_contenido.Lista_entrada mItem;
 
             public ViewHolder(View view) {
                 super(view);
                 mView = view;
-                mIdView = (TextView) view.findViewById(R.id.id);
-                mContentView = (TextView) view.findViewById(R.id.content);
+                imagenEntrada = (ImageView) view.findViewById(R.id.imageView_imagen_miniatura);
+                texto_superior_entrada = (TextView) view.findViewById(R.id.textView_titulo);
             }
 
             @Override
             public String toString() {
-                return super.toString() + " '" + mContentView.getText() + "'";
+                return super.toString() + " '" + texto_superior_entrada.getText() + "'";
             }
         }
     }
